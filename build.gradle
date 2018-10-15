@@ -7,7 +7,7 @@ buildscript {
     repositories {
         maven {
             name 'prok'
-            url 'https://djoveryde.000webhostapp.com/kcauldron/files/'
+            url 'https://dev.cyberarmy.co.uk/kcauldron/files/'
         }
         maven {
             name 'forge'
@@ -28,8 +28,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath files('FGS.jar')
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.0.2'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.0-SNAPSHOT'
     }
 }
 
@@ -42,12 +41,12 @@ task wrapper(type: Wrapper) {
 }
 
 apply plugin: 'maven'
-//apply plugin: 'cauldron'
+apply plugin: 'cauldron'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 apply plugin: 'java'
-//apply plugin: 'net.minecraftforge.gradle.patcher'
-//apply plugin: 'net.minecraftforge.gradle.launch4j'
+apply plugin: 'net.minecraftforge.gradle.patcher'
+apply plugin: 'net.minecraftforge.gradle.launch4j'
 
 repositories {
     clear()
@@ -57,7 +56,7 @@ repositories {
     }
     maven {
         name 'prok'
-        url 'https://djoveryde.000webhostapp.com/kcauldron/files/'
+        url 'https://dev.cyberarmy.co.uk/kcauldron/files/'
     }
     maven {
         name 'forge'
@@ -80,33 +79,33 @@ repositories {
     mavenLocal()
 }
 
- minecraft {
-      version = '1.11.2'
-      mcpVersion = '9.37'
-      mainClass = 'net.minecraftforge.fml.relauncher.ServerLaunchWrapper'
-      tweakClass = 'net.minecraftforge.fml.common.launcher.FMLTweaker'
-      installerVersion = "1.5"
-      srgExtra "PK: org/bukkit/bukkit org/bukkit/bukkit/1.11.2-R0.1-SNAPSHOT"
- }
+minecraft {
+    version = '1.11.2'
+    mcpVersion = '9.37'
+    mainClass = 'net.minecraftforge.fml.relauncher.ServerLaunchWrapper'
+    tweakClass = 'net.minecraftforge.fml.common.launcher.FMLTweaker'
+    installerVersion = "1.5"
+    srgExtra "PK: org/bukkit/bukkit org/bukkit/bukkit/1.11.2-R0.1-SNAPSHOT"
+}
 
-group = 'djoveryde'
+group = 'Terminal-Access'
 
 ext.buildInfoCached = null;
 
 def buildInfo(String key) {
-//    if (!buildInfoCached) {
-//       if (project.hasProperty('officialBuild')) {
-//            buildInfoCached = new JsonSlurper().parse(new URL("https://th.tcpr.ca/version"))
-//        } else {
+    if (!buildInfoCached) {
+       if (project.hasProperty('officialBuild')) {
+            buildInfoCached = new JsonSlurper().parse(new URL("https://dev.cyberarmy.co.uk/thermos/version/?version=1.11.2"))
+        } else {
             buildInfoCached = [
                     nextBuildNumber: 'UNOFFICIAL',
                     version        : 'NONE'
             ]
-    return buildInfoCached;
-//        }
-//    }
-//    return key ? buildInfoCached[key] : buildInfoCached;
- }
+	        return buildInfoCached;
+        }
+    }
+    return key ? buildInfoCached[key] : buildInfoCached;
+}
  
 ext.gitInfoCached = null;
 
@@ -251,7 +250,7 @@ task packageChangelog(type: CreateChangelog) {
     onlyIf { project.hasProperty('officialBuild') }
     classifier = 'changelog'
     extension = 'txt'
-    oldChangelogUrl = "https://i.tcpr.ca/thermos/changelog.txt"
+    oldChangelogUrl = "https://dev.cyberarmy.co.uk/thermos/version/changelog.txt"
     hash = gitInfo('hash')
     message = gitInfo('message')
     version = project.version
@@ -314,7 +313,7 @@ publishing {
     repositories {
         maven {
             name 'ProK'
-            url 'https://djoveryde.000webhostapp.com/kcauldron/files/'
+            url 'https://dev.cyberarmy.co.uk/kcauldron/files/'
             credentials {
                 username project.hasProperty('prokRepoUsername') ? prokRepoUsername : null
                 password project.hasProperty('prokRepoPassword') ? prokRepoPassword : null
@@ -349,7 +348,7 @@ repositories {
     clear()
     maven {
         name 'prok'
-        url 'https://djoveryde.000webhostapp.com/kcauldron/files/'
+        url 'https://dev.cyberarmy.co.uk/kcauldron/files/'
     }
     maven {
         name 'forge'
