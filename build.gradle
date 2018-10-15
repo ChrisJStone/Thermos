@@ -7,7 +7,7 @@ buildscript {
     repositories {
         maven {
             name 'prok'
-            url 'https://djoveryde.000webhostapp.com/kcauldron/files/'
+            url 'https://dev.cyberarmy.co.uk/kcauldron/files/'
         }
         maven {
             name 'forge'
@@ -28,8 +28,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath files('FGS.jar')
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.0.2'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.0-SNAPSHOT'
     }
 }
 
@@ -57,7 +56,7 @@ repositories {
     }
     maven {
         name 'prok'
-        url 'https://djoveryde.000webhostapp.com/kcauldron/files/'
+        url 'https://dev.cyberarmy.co.uk/kcauldron/files/'
     }
     maven {
         name 'forge'
@@ -101,24 +100,24 @@ minecraft {
         tweakClassServer "net.minecraftforge.fml.common.launcher.FMLServerTweaker"
     }
 
-group = 'djoveryde'
+group = 'Terminal-Access'
 
 ext.buildInfoCached = null;
 
 def buildInfo(String key) {
-//    if (!buildInfoCached) {
-//       if (project.hasProperty('officialBuild')) {
-//            buildInfoCached = new JsonSlurper().parse(new URL("https://th.tcpr.ca/version"))
-//        } else {
+    if (!buildInfoCached) {
+       if (project.hasProperty('officialBuild')) {
+            buildInfoCached = new JsonSlurper().parse(new URL("https://dev.cyberarmy.co.uk/thermos/version/?version=1.10.2"))
+        } else {
             buildInfoCached = [
                     nextBuildNumber: 'UNOFFICIAL',
                     version        : 'NONE'
             ]
-    return buildInfoCached;
-//        }
-//    }
-//    return key ? buildInfoCached[key] : buildInfoCached;
- }
+	        return buildInfoCached;
+        }
+    }
+    return key ? buildInfoCached[key] : buildInfoCached;
+}
  
 ext.gitInfoCached = null;
 
@@ -227,7 +226,7 @@ dependencies {
     libraries 'org.xerial:sqlite-jdbc:3.7.2'
     libraries 'mysql:mysql-connector-java:5.1.14'
     libraries 'javax.persistence:persistence-api:1.0.2'
-    libraries 'net.minecraft:server:1.11.2'
+    libraries 'net.minecraft:server:1.10.2'
     libraries 'pw.prok:KImagine:0.2.0@jar'
     libraries 'org.apache.httpcomponents:httpclient:4.4.1'
     libraries 'net.openhft:affinity:3.0.1'
@@ -296,7 +295,7 @@ task packageChangelog(type: CreateChangelog) {
     onlyIf { project.hasProperty('officialBuild') }
     classifier = 'changelog'
     extension = 'txt'
-    oldChangelogUrl = "https://i.tcpr.ca/thermos/changelog.txt"
+    oldChangelogUrl = "https://dev.cyberarmy.co.uk/thermos/changelog.txt"
     hash = gitInfo('hash')
     message = gitInfo('message')
     version = project.version
@@ -359,7 +358,7 @@ publishing {
     repositories {
         maven {
             name 'ProK'
-            url 'https://djoveryde.000webhostapp.com/kcauldron/files/'
+            url 'https://dev.cyberarmy.co.uk/kcauldron/files/'
             credentials {
                 username project.hasProperty('prokRepoUsername') ? prokRepoUsername : null
                 password project.hasProperty('prokRepoPassword') ? prokRepoPassword : null
@@ -394,7 +393,7 @@ repositories {
     clear()
     maven {
         name 'prok'
-        url 'https://djoveryde.000webhostapp.com/kcauldron/files/'
+        url 'https://dev.cyberarmy.co.uk/kcauldron/files/'
     }
     maven {
         name 'forge'
