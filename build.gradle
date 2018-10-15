@@ -43,9 +43,6 @@ task wrapper(type: Wrapper) {
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
-apply plugin: 'java'
-apply plugin: 'net.minecraftforge.gradle.patcher'
-apply plugin: 'net.minecraftforge.gradle.launch4j'
 
 repositories {
     clear()
@@ -79,7 +76,7 @@ repositories {
 }
 
 minecraft {
-    version = '1.10'
+    version = '1.10.2'
     mcpVersion = '9.31'
     mainClass = 'net.minecraftforge.fml.relauncher.ServerLaunchWrapper'
     tweakClass = 'net.minecraftforge.fml.common.launcher.FMLTweaker'
@@ -136,7 +133,7 @@ version = "${mcVersion}-${forgeVersion}.${revision}"
 if (project.hasProperty('officialBuild')) println "Updated Thermos version: ${version}"
 
 launch4j {
-     jreMinVersion = '1.8.0'
+    jreMinVersion = '1.8.0'
  }
 
 configurations {
@@ -375,6 +372,4 @@ task resolveAllDependencies {
     doLast {
         configurations.each { it.resolve() }
     }
-}
-}
 }
